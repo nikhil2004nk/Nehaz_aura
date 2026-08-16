@@ -20,17 +20,17 @@ export default function Home() {
       <Navbar />
       <main className="flex-grow">
         <Hero />
-        <WhoIsThisFor />
         <About />
+        <WhoIsThisFor />
         <Classes />
         <TeachersSection />
         <Schedule />
         <Testimonials />
         <Pricing />
+        <LeadForm />
         <FAQ />
         <InstagramPromo />
         <InstagramFeedsContainer />
-        <LeadForm />
         <FinalCTA />
       </main>
       <Footer />
