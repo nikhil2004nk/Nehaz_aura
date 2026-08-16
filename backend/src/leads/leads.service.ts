@@ -2,7 +2,7 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Between, LessThanOrEqual, MoreThanOrEqual, Like, FindOptionsWhere } from 'typeorm';
 import { Lead, LeadStatus, LeadLog } from './entities/lead.entity';
-import { v4 as uuidv4 } from 'uuid';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class LeadsService {
@@ -35,7 +35,7 @@ export class LeadsService {
     if (updateData.status) {
       const istTimeString = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
       const logEntry: LeadLog = {
-        id: uuidv4(),
+        id: crypto.randomUUID(),
         message: `Status changed from "${lead.status}" to "${updateData.status}"`,
         type: 'status_change',
         createdAt: new Date(istTimeString).toISOString(),
@@ -55,7 +55,7 @@ export class LeadsService {
 
     const istTimeString = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
     const logEntry: LeadLog = {
-      id: uuidv4(),
+      id: crypto.randomUUID(),
       message: logData.message,
       type: logData.type,
       createdAt: new Date(istTimeString).toISOString(),
