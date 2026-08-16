@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
@@ -13,13 +14,37 @@ async function bootstrap() {
     transform: true,
   }));
   
-  // Enable CORS so the Next.js frontend can make requests
   app.enableCors({
-    origin: 'http://localhost:3000',
-    credentials: true, // Allow cookies
+    origin: ['http://localhost:3000', 'https://nehaz-aura.vercel.app'],
+    credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   });
   
-  await app.listen(process.env.PORT ?? 3001);
+  await app.init();
+  return app;
 }
-bootstrap();
+
+let cachedServer: any;
+
+export default async function handler(req: any, res: any) {
+  try {
+    if (!cachedServer) {
+      const app = await bootstrap();
+      cachedServer = app.getHttpAdapter().getInstance();
+    }
+    return cachedServer(req, res);
+  } catch (error: any) {
+    console.error('NestJS Serverless Error:', error);
+    res.status(500).json({ 
+      message: 'Internal Server Error during NestJS initialization', 
+      error: error.message,
+      stack: error.stack
+    });
+  }
+}
+
+if (!process.env.VERCEL) {
+  bootstrap().then(app => {
+    app.listen(process.env.PORT ?? 3001);
+  });
+}
