@@ -1,6 +1,5 @@
-import { environment } from '../config/environment';
 "use client";
-
+import { environment } from '../config/environment';
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

@@ -1,6 +1,5 @@
-import { environment } from '../config/environment';
 "use client";
-
+import { environment } from '../config/environment';
 import { useEffect, useState } from "react";
 import InstagramFeed from "./InstagramFeed";
 

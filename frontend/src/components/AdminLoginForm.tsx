@@ -1,6 +1,5 @@
-import { environment } from '../config/environment';
 "use client";
-
+import { environment } from '../config/environment';
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, AlertCircle, Phone, Lock, Eye, EyeOff } from "lucide-react";

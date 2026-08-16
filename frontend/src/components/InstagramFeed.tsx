@@ -1,6 +1,5 @@
-import { environment } from '../config/environment';
 "use client";
-
+import { environment } from '../config/environment';
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Heart, MessageCircle, Play } from "lucide-react";

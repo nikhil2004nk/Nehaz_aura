@@ -1,6 +1,5 @@
-import { environment } from '../config/environment';
 "use client";
-
+import { environment } from '../config/environment';
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, RefreshCw, AlertCircle, MessageSquarePlus, Phone, Mail, StickyNote, X, Search } from "lucide-react";
