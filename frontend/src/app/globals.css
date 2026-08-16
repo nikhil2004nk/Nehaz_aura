@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  --background: #faf9f6;
+  /* Off-white / soft beige */
+  --foreground: #2d3748;
+  /* Dark gray, softer than pure black */
+  --beige-light: #f5f0e6;
+  --beige-dark: #e6dfd3;
+  --dark-forest: #1a2421;
+  /* Dark luxury color */
+  --dark-forest-light: #24332e;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-beige-light: var(--beige-light);
+  --color-beige-dark: var(--beige-dark);
+  --color-dark-forest: var(--dark-forest);
+  --color-dark-forest-light: var(--dark-forest-light);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 3.5rem; /* Accounts for fixed navbar so sections aren't hidden */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Global Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--beige-dark);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground);
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--beige-dark) var(--background);
+}
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+}
+
+/* Hide scrollbar globally for any element with .scrollbar-hide */
+.scrollbar-hide,
+.scrollbar-hide * {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+.scrollbar-hide::-webkit-scrollbar,
+.scrollbar-hide *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}

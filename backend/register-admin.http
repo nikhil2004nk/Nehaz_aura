@@ -1,0 +1,12 @@
+### Register Admin Account
+# Make sure your backend is running on port 3001
+POST http://localhost:3001/auth/register
+Content-Type: application/json
+
+{
+  "name": "Admin User",
+  "email": "admin@gmail.com",
+  "phone": "7304112069",
+  "password": "Nikhil@123",
+  "role": "ADMIN"
+}
