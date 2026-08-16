@@ -1,3 +1,4 @@
+import { environment } from '../config/environment';
 "use client";
 
 import { useEffect, useState } from "react";
@@ -10,7 +11,7 @@ export default function InstagramFeedsContainer() {
   useEffect(() => {
     const fetchProfiles = async () => {
       try {
-        const res = await fetch('http://localhost:3001/instagram/public-profiles');
+        const res = await fetch(`${environment.apiUrl}/instagram/public-profiles`);
         if (res.ok) {
           const data = await res.json();
           setProfiles(data);

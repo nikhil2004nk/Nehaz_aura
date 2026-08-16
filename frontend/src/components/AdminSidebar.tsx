@@ -1,3 +1,4 @@
+import { environment } from '../config/environment';
 "use client";
 
 import { useState } from "react";
@@ -12,7 +13,7 @@ export default function AdminSidebar() {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:3001/auth/logout", {
+      await fetch(`${environment.apiUrl}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

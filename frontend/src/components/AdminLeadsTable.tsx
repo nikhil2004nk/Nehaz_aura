@@ -1,3 +1,4 @@
+import { environment } from '../config/environment';
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -112,7 +113,7 @@ export default function AdminLeadsTable() {
     let res = await fetch(url, { ...options, credentials: "include" });
     
     if (res.status === 401) {
-      const refreshRes = await fetch("http://localhost:3001/auth/refresh", {
+      const refreshRes = await fetch(`${environment.apiUrl}/auth/refresh`, {
         method: "POST",
         credentials: "include",
       });
@@ -170,7 +171,7 @@ export default function AdminLeadsTable() {
 
       const queryParams = `?${params.toString()}`;
 
-      const res = await authFetch(`http://localhost:3001/leads${queryParams}`);
+      const res = await authFetch(`${environment.apiUrl}/leads${queryParams}`);
       
       if (!res.ok) throw new Error("Failed to fetch leads");
       
@@ -195,7 +196,7 @@ export default function AdminLeadsTable() {
 
   const fetchStats = async () => {
     try {
-      const res = await authFetch("http://localhost:3001/leads/stats");
+      const res = await authFetch(`${environment.apiUrl}/leads/stats`);
       if (res.ok) {
         const { data } = await res.json();
         setStats(data);
@@ -242,7 +243,7 @@ export default function AdminLeadsTable() {
 
   const handleStatusChange = async (leadId: string, newStatus: string) => {
     try {
-      const res = await authFetch(`http://localhost:3001/leads/${leadId}/status`, {
+      const res = await authFetch(`${environment.apiUrl}/leads/${leadId}/status`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
@@ -269,7 +270,7 @@ export default function AdminLeadsTable() {
 
     try {
       setIsAddingLog(true);
-      const res = await authFetch(`http://localhost:3001/leads/${logDrawerLead.id}/logs`, {
+      const res = await authFetch(`${environment.apiUrl}/leads/${logDrawerLead.id}/logs`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: newLogMessage.trim(), type: newLogType }),

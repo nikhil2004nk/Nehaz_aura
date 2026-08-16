@@ -1,3 +1,4 @@
+import { environment } from '../config/environment';
 "use client";
 
 import { motion } from "framer-motion";
@@ -54,8 +55,8 @@ export default function InstagramFeed({ username = "nehaz_aaura" }: { username?:
     const fetchData = async () => {
       try {
         const [postsRes, profileRes] = await Promise.all([
-          fetch(`http://localhost:3001/instagram/posts?username=${username}`),
-          fetch(`http://localhost:3001/instagram/profile?username=${username}`)
+          fetch(`${environment.apiUrl}/instagram/posts?username=${username}`),
+          fetch(`${environment.apiUrl}/instagram/profile?username=${username}`)
         ]);
         
         if (postsRes.ok) {
@@ -159,7 +160,7 @@ export default function InstagramFeed({ username = "nehaz_aaura" }: { username?:
                   {/* Post Media */}
                   {isVideo ? (
                     <video 
-                      src={`http://localhost:3001/instagram/image?url=${encodeURIComponent(mediaUrl as string)}`}
+                      src={`${environment.apiUrl}/instagram/image?url=${encodeURIComponent(mediaUrl as string)}`}
                       autoPlay
                       muted
                       loop
@@ -169,7 +170,7 @@ export default function InstagramFeed({ username = "nehaz_aaura" }: { username?:
                   ) : (
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img 
-                      src={`http://localhost:3001/instagram/image?url=${encodeURIComponent(mediaUrl as string)}`} 
+                      src={`${environment.apiUrl}/instagram/image?url=${encodeURIComponent(mediaUrl as string)}`} 
                       alt={post.caption?.substring(0, 50) || "Instagram post"} 
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
@@ -222,7 +223,7 @@ export default function InstagramFeed({ username = "nehaz_aaura" }: { username?:
                   <>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img 
-                      src={`http://localhost:3001/instagram/image?url=${encodeURIComponent(profile.profilePicUrl)}`}
+                      src={`${environment.apiUrl}/instagram/image?url=${encodeURIComponent(profile.profilePicUrl)}`}
                       alt={profile.fullName}
                       className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-white shadow-sm mb-3 md:mb-4 object-cover"
                     />

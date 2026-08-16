@@ -1,3 +1,4 @@
+import { environment } from '../config/environment';
 "use client";
 
 import { useState } from "react";
@@ -25,7 +26,7 @@ export default function AdminLoginForm() {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:3001/auth/login", {
+      const response = await fetch(`${environment.apiUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

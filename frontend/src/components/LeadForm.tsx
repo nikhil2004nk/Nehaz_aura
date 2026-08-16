@@ -1,3 +1,4 @@
+import { environment } from '../config/environment';
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -29,7 +30,7 @@ export default function LeadForm() {
     setBackendError(null);
     
     try {
-      const response = await fetch("http://localhost:3001/leads", {
+      const response = await fetch(`${environment.apiUrl}/leads`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
