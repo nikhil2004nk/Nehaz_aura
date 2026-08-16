@@ -6,9 +6,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { InstagramModule } from './instagram/instagram.module';
 import { InstagramPost } from './instagram/entities/instagram-post.entity';
+import { InstagramProfile } from './instagram/entities/instagram-profile.entity';
 import { LeadsModule } from './leads/leads.module';
 import { Lead } from './leads/entities/lead.entity';
 import { UsersModule } from './users/users.module';
+import { User } from './users/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
@@ -28,8 +30,7 @@ import { AuthModule } from './auth/auth.module';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [InstagramPost, Lead],
-        autoLoadEntities: true,
+        entities: [InstagramPost, InstagramProfile, Lead, User],
         synchronize: true, // Note: turn off in production
       }),
     }),
