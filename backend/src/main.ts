@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import 'mysql2'; // Force Vercel bundler to include the TypeORM driver
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
