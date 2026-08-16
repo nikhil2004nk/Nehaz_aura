@@ -12,6 +12,8 @@ import { Lead } from './leads/entities/lead.entity';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
+import { TeachersModule } from './teachers/teachers.module';
+import { Teacher } from './teachers/entities/teacher.entity';
 
 @Module({
   imports: [
@@ -30,7 +32,7 @@ import { AuthModule } from './auth/auth.module';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [InstagramPost, InstagramProfile, Lead, User],
+        entities: [InstagramPost, InstagramProfile, Lead, User, Teacher],
         synchronize: true, // Note: turn off in production
       }),
     }),
@@ -38,6 +40,7 @@ import { AuthModule } from './auth/auth.module';
     LeadsModule,
     UsersModule,
     AuthModule,
+    TeachersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

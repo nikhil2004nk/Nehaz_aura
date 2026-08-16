@@ -19,7 +19,8 @@ type Lead = {
   name: string;
   phone: string;
   age?: string;
-  state?: string;
+  country?: string;
+  healthConditions?: string;
   time?: string;
   status: string;
   logs: LeadLog[] | null;
@@ -359,7 +360,7 @@ export default function AdminLeadsTable() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search name, phone, state..."
+              placeholder="Search name, phone, country..."
               className="bg-background border border-foreground/10 text-foreground text-xs rounded-xl pl-9 pr-8 py-2 w-full sm:w-56 focus:outline-none focus:border-foreground/20 transition-colors placeholder:text-foreground/30 h-[34px]"
             />
             {searchQuery && (
@@ -474,7 +475,8 @@ export default function AdminLeadsTable() {
                   <th className="px-4 sm:px-6 py-3 text-[10px] uppercase tracking-widest text-foreground/40 font-medium">Date</th>
                   <th className="px-4 sm:px-6 py-3 text-[10px] uppercase tracking-widest text-foreground/40 font-medium">Contact</th>
                   <th className="px-4 sm:px-6 py-3 text-[10px] uppercase tracking-widest text-foreground/40 font-medium">Age</th>
-                  <th className="px-4 sm:px-6 py-3 text-[10px] uppercase tracking-widest text-foreground/40 font-medium">State</th>
+                  <th className="px-4 sm:px-6 py-3 text-[10px] uppercase tracking-widest text-foreground/40 font-medium">Country</th>
+                  <th className="px-4 sm:px-6 py-3 text-[10px] uppercase tracking-widest text-foreground/40 font-medium">Health Issues</th>
                   <th className="px-4 sm:px-6 py-3 text-[10px] uppercase tracking-widest text-foreground/40 font-medium">Time Pref.</th>
                   <th className="px-4 sm:px-6 py-3 text-[10px] uppercase tracking-widest text-foreground/40 font-medium text-center">Status</th>
                   <th className="px-4 sm:px-6 py-3 text-[10px] uppercase tracking-widest text-foreground/40 font-medium">Actions</th>
@@ -505,7 +507,8 @@ export default function AdminLeadsTable() {
                       <div className="text-[10px] text-foreground/40 font-mono mt-0.5">{lead.phone}</div>
                     </td>
                     <td className="px-4 sm:px-6 py-3 text-xs text-foreground/50">{lead.age || "—"}</td>
-                    <td className="px-4 sm:px-6 py-3 text-xs text-foreground/50">{lead.state || "—"}</td>
+                    <td className="px-4 sm:px-6 py-3 text-xs text-foreground/50">{lead.country || "—"}</td>
+                    <td className="px-4 sm:px-6 py-3 text-xs text-foreground/50 max-w-[150px] truncate" title={lead.healthConditions}>{lead.healthConditions || "—"}</td>
                     <td className="px-4 sm:px-6 py-3 text-xs text-foreground/50 capitalize">{lead.time || "—"}</td>
                     <td className="px-4 sm:px-6 py-3">
                       <div className="flex justify-center">

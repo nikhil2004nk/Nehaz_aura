@@ -16,7 +16,11 @@ export class CreateLeadDto {
 
   @IsString()
   @IsOptional()
-  state?: string;
+  country?: string;
+
+  @IsString()
+  @IsOptional()
+  healthConditions?: string;
 
   @IsString()
   @IsOptional()

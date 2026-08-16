@@ -139,7 +139,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto py-6 space-y-8">
+    <div className="w-full max-w-4xl mx-auto space-y-8">
       <div>
         <h2 className="text-2xl font-serif text-foreground tracking-tight mb-1">Settings</h2>
         <p className="text-xs text-foreground/50 uppercase tracking-widest font-medium">Manage your profile and security</p>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Users, Settings, LogOut, Menu, X, LayoutDashboard, Image as ImageIcon } from "lucide-react";
+import { Users, Settings, LogOut, Menu, X, LayoutDashboard, Image as ImageIcon, GraduationCap } from "lucide-react";
 
 export default function AdminSidebar() {
   const pathname = usePathname();
@@ -24,6 +24,7 @@ export default function AdminSidebar() {
 
   const menuItems = [
     { name: "Leads", icon: Users, href: "/admin" },
+    { name: "Teachers", icon: GraduationCap, href: "/admin/teachers" },
     { name: "Instagram", icon: ImageIcon, href: "/admin/instagram" },
     { name: "Settings", icon: Settings, href: "/admin/settings" },
   ];

@@ -324,7 +324,7 @@ export default function InstagramManagementPage() {
   }
 
   return (
-    <div className="flex-1 p-6 md:p-10 w-full max-w-6xl mx-auto space-y-8 relative">
+    <div className="w-full space-y-8 relative">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
         <div>
           <h2 className="text-xl sm:text-2xl font-serif text-foreground tracking-tight mb-1 flex items-center gap-3">

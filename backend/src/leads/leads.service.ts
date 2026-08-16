@@ -114,14 +114,14 @@ export class LeadsService {
 
     const skip = (page - 1) * limit;
 
-    // If search is provided, search across name, phone, and state
+    // If search is provided, search across name, phone, and country
     let whereClause: FindOptionsWhere<Lead>[] | FindOptionsWhere<Lead>;
 
     if (search) {
       whereClause = [
         { ...baseConditions, name: Like(`%${search}%`) },
         { ...baseConditions, phone: Like(`%${search}%`) },
-        { ...baseConditions, state: Like(`%${search}%`) },
+        { ...baseConditions, country: Like(`%${search}%`) },
       ];
     } else {
       whereClause = baseConditions;

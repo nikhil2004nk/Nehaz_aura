@@ -11,7 +11,8 @@ export default function LeadForm() {
     phone: "",
     age: "",
     time: "",
-    state: ""
+    country: "",
+    healthConditions: ""
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,7 +49,7 @@ export default function LeadForm() {
       }
 
       setIsSuccess(true);
-      setFormData({ name: "", phone: "", age: "", time: "", state: "" });
+      setFormData({ name: "", phone: "", age: "", time: "", country: "", healthConditions: "" });
     } catch (error: any) {
       console.error("Error submitting form:", error);
       setBackendError(error.message || "Something went wrong. Please try again.");
@@ -128,56 +129,44 @@ export default function LeadForm() {
                 />
               </div>
               
-              {/* State */}
+              {/* Country */}
               <div className="relative z-[60]">
-                <label htmlFor="state" className="block text-[10px] uppercase tracking-widest text-foreground/60 mb-2">State / Location</label>
+                <label htmlFor="country" className="block text-[10px] uppercase tracking-widest text-foreground/60 mb-2">Country</label>
                 <CustomSelect
-                  id="state"
-                  name="state"
-                  value={formData.state}
+                  id="country"
+                  name="country"
+                  value={formData.country}
                   onChange={handleChange as any}
-                  placeholder="Select a state..."
+                  placeholder="Select a country..."
                   showSearch={true}
                   options={[
-                    { value: "Andhra Pradesh", label: "Andhra Pradesh" },
-                    { value: "Arunachal Pradesh", label: "Arunachal Pradesh" },
-                    { value: "Assam", label: "Assam" },
-                    { value: "Bihar", label: "Bihar" },
-                    { value: "Chhattisgarh", label: "Chhattisgarh" },
-                    { value: "Goa", label: "Goa" },
-                    { value: "Gujarat", label: "Gujarat" },
-                    { value: "Haryana", label: "Haryana" },
-                    { value: "Himachal Pradesh", label: "Himachal Pradesh" },
-                    { value: "Jharkhand", label: "Jharkhand" },
-                    { value: "Karnataka", label: "Karnataka" },
-                    { value: "Kerala", label: "Kerala" },
-                    { value: "Madhya Pradesh", label: "Madhya Pradesh" },
-                    { value: "Maharashtra", label: "Maharashtra" },
-                    { value: "Manipur", label: "Manipur" },
-                    { value: "Meghalaya", label: "Meghalaya" },
-                    { value: "Mizoram", label: "Mizoram" },
-                    { value: "Nagaland", label: "Nagaland" },
-                    { value: "Odisha", label: "Odisha" },
-                    { value: "Punjab", label: "Punjab" },
-                    { value: "Rajasthan", label: "Rajasthan" },
-                    { value: "Sikkim", label: "Sikkim" },
-                    { value: "Tamil Nadu", label: "Tamil Nadu" },
-                    { value: "Telangana", label: "Telangana" },
-                    { value: "Tripura", label: "Tripura" },
-                    { value: "Uttar Pradesh", label: "Uttar Pradesh" },
-                    { value: "Uttarakhand", label: "Uttarakhand" },
-                    { value: "West Bengal", label: "West Bengal" },
-                    { value: "Andaman and Nicobar Islands", label: "Andaman and Nicobar Islands" },
-                    { value: "Chandigarh", label: "Chandigarh" },
-                    { value: "Dadra and Nagar Haveli and Daman and Diu", label: "Dadra and Nagar Haveli and Daman and Diu" },
-                    { value: "Delhi", label: "Delhi" },
-                    { value: "Jammu and Kashmir", label: "Jammu and Kashmir" },
-                    { value: "Ladakh", label: "Ladakh" },
-                    { value: "Lakshadweep", label: "Lakshadweep" },
-                    { value: "Puducherry", label: "Puducherry" },
+                    { value: "India", label: "India" },
+                    { value: "United States", label: "United States" },
+                    { value: "United Kingdom", label: "United Kingdom" },
+                    { value: "Canada", label: "Canada" },
+                    { value: "Australia", label: "Australia" },
+                    { value: "Germany", label: "Germany" },
+                    { value: "France", label: "France" },
+                    { value: "United Arab Emirates", label: "United Arab Emirates" },
+                    { value: "Singapore", label: "Singapore" },
+                    { value: "Other", label: "Other" }
                   ]}
                 />
               </div>
+            </div>
+
+            {/* Health Conditions */}
+            <div>
+              <label htmlFor="healthConditions" className="block text-[10px] uppercase tracking-widest text-foreground/60 mb-2">Any health conditions or injuries? (Optional)</label>
+              <textarea
+                id="healthConditions"
+                name="healthConditions"
+                rows={2}
+                value={formData.healthConditions}
+                onChange={handleChange as any}
+                className="w-full bg-background border border-foreground/10 text-foreground text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-foreground/30 transition-colors resize-none"
+                placeholder="e.g. Lower back pain, recent surgery..."
+              />
             </div>
             
             {/* Select Time */}

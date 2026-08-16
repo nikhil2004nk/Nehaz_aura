@@ -32,7 +32,10 @@ export class Lead {
   age: string;
 
   @Column({ nullable: true })
-  state: string;
+  country: string;
+
+  @Column({ nullable: true, type: 'text' })
+  healthConditions: string;
 
   @Column({ nullable: true })
   time: string;

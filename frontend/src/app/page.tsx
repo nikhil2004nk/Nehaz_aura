@@ -9,6 +9,7 @@ import Pricing from "@/components/Pricing";
 import FAQ from "@/components/FAQ";
 import InstagramPromo from "@/components/InstagramPromo";
 import InstagramFeedsContainer from "@/components/InstagramFeedsContainer";
+import TeachersSection from "@/components/TeachersSection";
 import LeadForm from "@/components/LeadForm";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -22,6 +23,7 @@ export default function Home() {
         <WhoIsThisFor />
         <About />
         <Classes />
+        <TeachersSection />
         <Schedule />
         <Testimonials />
         <Pricing />
@@ -35,4 +37,3 @@ export default function Home() {
     </>
   );
 }
-
