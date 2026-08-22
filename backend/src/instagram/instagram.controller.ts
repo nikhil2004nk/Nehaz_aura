@@ -74,6 +74,10 @@ export class InstagramController {
     
     try {
       https.get(url, (imageRes) => {
+        // Forward the status code
+        if (imageRes.statusCode) {
+          res.status(imageRes.statusCode);
+        }
         // Forward the content type and cache headers
         if (imageRes.headers['content-type']) {
           res.set('Content-Type', imageRes.headers['content-type']);

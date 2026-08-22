@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { User, Lock, Save, KeyRound, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
+import { User, Lock, Save, KeyRound, Loader2, AlertCircle, CheckCircle2, Eye, EyeOff } from "lucide-react";
 import { environment } from "@/config/environment";
 import { authFetch } from "@/utils/authFetch";
 
@@ -17,6 +17,11 @@ export default function SettingsPage() {
   const [passwordForm, setPasswordForm] = useState({ oldPassword: "", newPassword: "", confirmPassword: "" });
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+
+  // Password Visibility State
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // Fetch Profile on Mount
   useEffect(() => {
@@ -244,38 +249,68 @@ export default function SettingsPage() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-semibold uppercase tracking-wider text-foreground/50">Current Password</label>
-              <input
-                type="password"
-                name="oldPassword"
-                value={passwordForm.oldPassword}
-                onChange={handlePasswordChange}
-                className="w-full bg-foreground/[0.02] border border-foreground/10 text-foreground rounded-xl px-4 py-2.5 focus:outline-none focus:border-foreground/30 transition-colors text-sm"
-                required
-              />
+              <div className="relative flex items-center">
+                <input
+                  type={showOldPassword ? "text" : "password"}
+                  name="oldPassword"
+                  value={passwordForm.oldPassword}
+                  onChange={handlePasswordChange}
+                  className="w-full bg-foreground/[0.02] border border-foreground/10 text-foreground rounded-xl pl-4 pr-10 py-2.5 focus:outline-none focus:border-foreground/30 transition-colors text-sm"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowOldPassword(!showOldPassword)}
+                  className="absolute right-3 text-foreground/40 hover:text-foreground transition-colors focus:outline-none"
+                  tabIndex={-1}
+                >
+                  {showOldPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
             </div>
             <div className="space-y-1.5">
               <label className="text-xs font-semibold uppercase tracking-wider text-foreground/50">New Password</label>
-              <input
-                type="password"
-                name="newPassword"
-                value={passwordForm.newPassword}
-                onChange={handlePasswordChange}
-                className="w-full bg-foreground/[0.02] border border-foreground/10 text-foreground rounded-xl px-4 py-2.5 focus:outline-none focus:border-foreground/30 transition-colors text-sm"
-                required
-                minLength={6}
-              />
+              <div className="relative flex items-center">
+                <input
+                  type={showNewPassword ? "text" : "password"}
+                  name="newPassword"
+                  value={passwordForm.newPassword}
+                  onChange={handlePasswordChange}
+                  className="w-full bg-foreground/[0.02] border border-foreground/10 text-foreground rounded-xl pl-4 pr-10 py-2.5 focus:outline-none focus:border-foreground/30 transition-colors text-sm"
+                  required
+                  minLength={6}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                  className="absolute right-3 text-foreground/40 hover:text-foreground transition-colors focus:outline-none"
+                  tabIndex={-1}
+                >
+                  {showNewPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
             </div>
             <div className="space-y-1.5">
               <label className="text-xs font-semibold uppercase tracking-wider text-foreground/50">Confirm New Password</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={passwordForm.confirmPassword}
-                onChange={handlePasswordChange}
-                className="w-full bg-foreground/[0.02] border border-foreground/10 text-foreground rounded-xl px-4 py-2.5 focus:outline-none focus:border-foreground/30 transition-colors text-sm"
-                required
-                minLength={6}
-              />
+              <div className="relative flex items-center">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={passwordForm.confirmPassword}
+                  onChange={handlePasswordChange}
+                  className="w-full bg-foreground/[0.02] border border-foreground/10 text-foreground rounded-xl pl-4 pr-10 py-2.5 focus:outline-none focus:border-foreground/30 transition-colors text-sm"
+                  required
+                  minLength={6}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-3 text-foreground/40 hover:text-foreground transition-colors focus:outline-none"
+                  tabIndex={-1}
+                >
+                  {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
             </div>
 
             <div className="mt-auto pt-4 flex justify-end">
