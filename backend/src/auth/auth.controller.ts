@@ -80,8 +80,8 @@ export class AuthController {
   private setCookies(res: Response, accessToken: string, refreshToken?: string) {
     const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict' as const,
+      secure: true, // Required for SameSite=None
+      sameSite: 'none' as const, // Required for cross-origin cookies
       path: '/',
     };
 
