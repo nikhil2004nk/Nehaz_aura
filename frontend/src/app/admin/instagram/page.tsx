@@ -5,6 +5,7 @@ import { Camera, Edit2, Check, X as XIcon, Link as LinkIcon, RefreshCw, ShieldAl
 import Image from "next/image";
 import { authFetch } from "@/utils/authFetch";
 import CustomSelect from "@/components/CustomSelect";
+import { environment } from "@/config/environment";
 
 interface InstaProfile {
   username: string;
@@ -80,7 +81,7 @@ export default function InstagramManagementPage() {
 
   const fetchProfilesList = async () => {
     try {
-      const res = await authFetch("http://localhost:3001/instagram/profiles");
+      const res = await authFetch(`${environment.apiUrl}/instagram/profiles`);
       if (res.ok) {
         const data = await res.json();
         const options = data.map((p: any) => ({ value: p.username, label: `@${p.username}` }));
@@ -101,8 +102,8 @@ export default function InstagramManagementPage() {
     setIsLoading(true);
     try {
       const [profileRes, postsRes] = await Promise.all([
-        authFetch(`http://localhost:3001/instagram/profile?username=${selectedUsername}`),
-        authFetch(`http://localhost:3001/instagram/posts?username=${selectedUsername}`)
+        authFetch(`${environment.apiUrl}/instagram/profile?username=${selectedUsername}`),
+        authFetch(`${environment.apiUrl}/instagram/posts?username=${selectedUsername}`)
       ]);
 
       if (profileRes.ok) {
@@ -149,7 +150,7 @@ export default function InstagramManagementPage() {
     isProfile ? setIsSyncingProfile(true) : setIsSyncingPosts(true);
 
     try {
-      const res = await authFetch(`http://localhost:3001/instagram/${endpoint}`, {
+      const res = await authFetch(`${environment.apiUrl}/instagram/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: finalUsername }),
@@ -173,7 +174,7 @@ export default function InstagramManagementPage() {
     if (!editingProfile) return;
     setIsSaving(true);
     try {
-      const res = await authFetch("http://localhost:3001/instagram/profile", {
+      const res = await authFetch(`${environment.apiUrl}/instagram/profile`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -201,7 +202,7 @@ export default function InstagramManagementPage() {
     if (!editingPost) return;
     setIsSaving(true);
     try {
-      const res = await authFetch(`http://localhost:3001/instagram/posts/${editingPost.id}`, {
+      const res = await authFetch(`${environment.apiUrl}/instagram/posts/${editingPost.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -233,7 +234,7 @@ export default function InstagramManagementPage() {
     setConfirmModal(null);
 
     try {
-      const res = await authFetch(`http://localhost:3001/instagram/posts/${postId}`, {
+      const res = await authFetch(`${environment.apiUrl}/instagram/posts/${postId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ isHidden: true }),
@@ -253,7 +254,7 @@ export default function InstagramManagementPage() {
     if (!deleteConfirmModal || deleteConfirmModal.type !== 'profile') return;
 
     try {
-      const res = await authFetch(`http://localhost:3001/instagram/profile/${deleteConfirmModal.username}`, {
+      const res = await authFetch(`${environment.apiUrl}/instagram/profile/${deleteConfirmModal.username}`, {
         method: 'DELETE'
       });
       if (res.ok) {
@@ -272,7 +273,7 @@ export default function InstagramManagementPage() {
     if (!deleteConfirmModal || deleteConfirmModal.type !== 'post') return;
 
     try {
-      const res = await authFetch(`http://localhost:3001/instagram/posts/${deleteConfirmModal.id}`, {
+      const res = await authFetch(`${environment.apiUrl}/instagram/posts/${deleteConfirmModal.id}`, {
         method: 'DELETE'
       });
       if (res.ok) {
@@ -295,7 +296,7 @@ export default function InstagramManagementPage() {
 
   const handleToggleVisibility = async (username: string, currentStatus: boolean) => {
     try {
-      const res = await authFetch(`http://localhost:3001/instagram/profile/${username}/visibility`, {
+      const res = await authFetch(`${environment.apiUrl}/instagram/profile/${username}/visibility`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ isVisible: !currentStatus })
@@ -406,7 +407,7 @@ export default function InstagramManagementPage() {
             </button>
             <div className="relative w-24 h-24 rounded-full overflow-hidden shrink-0 border border-foreground/10 ring-4 ring-background shadow-md">
               <Image
-                src={`http://localhost:3001/instagram/image?url=${encodeURIComponent(profile.profilePicUrl)}`}
+                src={`${environment.apiUrl}/instagram/image?url=${encodeURIComponent(profile.profilePicUrl)}`}
                 alt={profile.username}
                 fill
                 className="object-cover"
@@ -477,7 +478,7 @@ export default function InstagramManagementPage() {
                         <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-foreground/5 border border-foreground/10 shrink-0">
                           {post.displayUrl ? (
                             <Image
-                              src={`http://localhost:3001/instagram/image?url=${encodeURIComponent(post.displayUrl)}`}
+                              src={`${environment.apiUrl}/instagram/image?url=${encodeURIComponent(post.displayUrl)}`}
                               alt="Instagram post"
                               fill
                               className="object-cover"
@@ -485,7 +486,7 @@ export default function InstagramManagementPage() {
                             />
                           ) : post.videoUrl ? (
                             <video
-                              src={`http://localhost:3001/instagram/image?url=${encodeURIComponent(post.videoUrl)}`}
+                              src={`${environment.apiUrl}/instagram/image?url=${encodeURIComponent(post.videoUrl)}`}
                               className="object-cover w-full h-full"
                               autoPlay
                               muted

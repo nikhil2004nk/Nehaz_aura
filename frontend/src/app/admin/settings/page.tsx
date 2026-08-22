@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { User, Lock, Save, KeyRound, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
+import { environment } from "@/config/environment";
+import { authFetch } from "@/utils/authFetch";
 
 export default function SettingsPage() {
   // Profile State
@@ -23,11 +25,7 @@ export default function SettingsPage() {
 
   const fetchProfile = async () => {
     try {
-      // Assuming a global authFetch or similar is configured.
-      // We will use standard fetch with credentials since cookies are used.
-      const res = await fetch("http://localhost:3001/auth/me", {
-        credentials: "include",
-      });
+      const res = await authFetch(`${environment.apiUrl}/auth/me`);
       if (res.ok) {
         const { data } = await res.json();
         const userData = {
@@ -66,10 +64,9 @@ export default function SettingsPage() {
     setIsUpdatingProfile(true);
     setProfileMessage(null);
     try {
-      const res = await fetch("http://localhost:3001/auth/me", {
+      const res = await authFetch(`${environment.apiUrl}/auth/me`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify(profile),
       });
       
@@ -106,10 +103,9 @@ export default function SettingsPage() {
     setIsUpdatingPassword(true);
     setPasswordMessage(null);
     try {
-      const res = await fetch("http://localhost:3001/auth/change-password", {
+      const res = await authFetch(`${environment.apiUrl}/auth/change-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({
           oldPassword: passwordForm.oldPassword,
           newPassword: passwordForm.newPassword
