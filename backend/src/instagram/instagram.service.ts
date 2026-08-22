@@ -102,6 +102,12 @@ export class InstagramService implements OnModuleInit {
       this.logger.log(`Apify run finished. Fetching dataset: ${run.defaultDatasetId}`);
       const { items } = await this.apifyClient.dataset(run.defaultDatasetId).listItems();
 
+      // If we successfully fetched fresh posts, delete the old non-edited ones first
+      if (items && items.length > 0) {
+        await this.instagramPostRepository.delete({ ownerUsername: username, isManuallyEdited: false });
+        this.logger.log(`Cleared old non-edited posts for ${username} to prepare for fresh sync.`);
+      }
+
       let savedCount = 0;
       for (const item of items) {
         // Skip items that don't have required data
